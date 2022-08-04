@@ -1,0 +1,80 @@
+﻿<Window x:Class="Отправить_билеты.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Отправка билетов" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Главная">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label      Grid.Row="0" Grid.Column="0" Content="E-mail"/>
+                    <TextBox    Grid.Row="0" Grid.Column="1" Name="email_textbox" />
+                    <Label      Grid.Row="0" Grid.Column="2" Content="Код Заказа"/>
+                    <TextBox    Grid.Row="0" Grid.Column="3" Name="ordercode_textbox" />
+                    <Label      Grid.Row="1" Grid.Column="0" Content="Id Заказа"/>
+                    <TextBox    Grid.Row="1" Grid.Column="1" Name="idorder_textbox" />
+                    <Label      Grid.Row="1" Grid.Column="2" Content="Номер тел."/>
+                    <TextBox    Grid.Row="1" Grid.Column="3" Name="phone_textbox" />
+                    <Label      Grid.Row="2" Grid.Column="0" Content="Дата с"/>
+                    <DatePicker Grid.Row="2" Grid.Column="1" Name="datefrom_textbox"/>
+                    <Label      Grid.Row="2" Grid.Column="2" Content="Дата по"/>
+                    <DatePicker Grid.Row="2" Grid.Column="3" Name="dateto_textbox"/>
+                    <Button     Grid.Row="3" Grid.Column="2" Name="search_button" Content="Найти"/>
+                    <Button     Grid.Row="3" Grid.Column="0" Name="send_button" Content="Отправить"/>
+                    <DataGrid   Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="2" Name="data_grid">
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Настройки">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="250"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label          Grid.Row="0" Grid.Column="0" Content="Пользователь" />
+                    <TextBox        Grid.Row="0" Grid.Column="1" Name="user_textbox"/>
+                    <Label          Grid.Row="1" Grid.Column="0" Content="Пароль"/>
+                    <PasswordBox    Grid.Row="1" Grid.Column="1" Name="password_textbox"/>
+                    <Label          Grid.Row="2" Grid.Column="1" Content="Логин и пароль от учётки moipass"/>
+                    <Label          Grid.Row="3" Grid.Column="0" Content="Куда слать" Grid.ColumnSpan="2"/>
+                    <TextBox        Grid.Row="3" Grid.Column="1" Name="sendmail_textbox"/>
+                    <Label          Grid.Row="0" Grid.Column="2" Content="Адрес admin"/>
+                    <TextBox        Grid.Row="0" Grid.Column="3" Name="admin_url_textbox"/>
+                    <Label          Grid.Row="1" Grid.Column="2" Content="Адрес list"/>
+                    <TextBox        Grid.Row="1" Grid.Column="3" Name="list_url_textbox"/>
+                    <Label          Grid.Row="2" Grid.Column="2" Content="Адрес send"/>
+                    <TextBox        Grid.Row="2" Grid.Column="3" Name="send_url_textbox"/>
+                    <Label          Grid.Row="3" Grid.Column="2" Content="Адрес main"/>
+                    <TextBox        Grid.Row="3" Grid.Column="3" Name="main_url_textbox"/>
+                    <Button         Grid.Row="4" Grid.Column="1" Name="save_button" Content="Сохранить настройки"/>
+                    <Button         Grid.Row="4" Grid.Column="3" Name="read_button" Content="Загрузить настройки"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
