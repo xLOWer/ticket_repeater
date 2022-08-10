@@ -85,6 +85,8 @@ namespace Отправить_билеты
                     };
                 });
                 list = _ws.GetList(data);
+                if (list == null)
+                    return;
 
                 Dispatcher.Invoke(() =>
                 {

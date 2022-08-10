@@ -30,10 +30,12 @@ namespace Отправить_билеты
         /// <returns></returns>
         public bool Send(string IdOrder)
         {
-            Auth();
+            if(!Auth()) 
+                return false;
             try
             {
                 _session.Post(ConfigManager.Parameters.SendUrl, $"Id={IdOrder}&UserName={Uri.EscapeDataString(ConfigManager.Parameters.SendMail)}");
+                return true;
             }
             catch(Exception ex)
             {
@@ -43,7 +45,6 @@ namespace Отправить_билеты
                 MessageBox.Show(ex.Message);
                 return false;
             }
-            return true;
         }
         ///////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -53,14 +54,15 @@ namespace Отправить_билеты
         /// <returns></returns>
         public List<SearchResult> GetList(SearchData search)
         {
+            if(!Auth()) 
+                return null;
             string searchString = GetLookupString(search);
-            Auth();
             // получаем список по поисковому запросу
             _session.Post(ConfigManager.Parameters.ListUrl, searchString, true);
             return HtmlParser.ProcessList(_session.ResponseData);
         }
         ///////////////////////////////////////////////////////////////////////////////////
-        private void Auth()
+        private bool Auth()
         {
             try
             {
@@ -72,7 +74,8 @@ namespace Отправить_билеты
                 string resp1url = _session.GetLocationValue();
                 // если отстрельнуло без редиректа, то значит сессия ещё не истекла
                 // поэтому в таком случае покинем метод
-                if (resp1url == null) return;
+                if (resp1url == null) 
+                    return false;
                 // делаем второй запрос
                 _session.Get(resp1url);
                 // он также отстрельнит редирект с ещё одним редиректом
@@ -88,8 +91,13 @@ namespace Отправить_билеты
                 _session.Get(resp1url);
                 // оттуда распарсим строку с тоекнами авторизации
                 _loginToken = HtmlParser.HtmlToTokenString(_session.ResponseData);
+                if(_loginToken == "code=&id_token=&scope=&state=&session_state=")
+                {
+                    throw new Exception("Что то не так с авторизацией. Проверьте правильность лоигна и пароля");
+                }
                 // и просто закидываем токен чтобы наша сессии регнулась в системе moipass
                 _session.Post(ConfigManager.Parameters.MainUrl, _loginToken);
+                return true;
             }
             catch (Exception ex)
             {
@@ -97,6 +105,7 @@ namespace Отправить_билеты
                 Logger.Log("EXCEPTION_StackTrace: " + ex.StackTrace);
                 Logger.Log("EXCEPTION_Source: " + ex.Source);
                 MessageBox.Show(ex.Message);
+                return false;
             }
         }
         ///////////////////////////////////////////////////////////////////////////////////
