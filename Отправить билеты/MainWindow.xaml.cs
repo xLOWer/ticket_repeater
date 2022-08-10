@@ -70,7 +70,6 @@ namespace Отправить_билеты
         {
             SafeRunCommand(() =>
             {
-                BlockUi();
                 SearchData data = new SearchData();
                 List<SearchResult> list = new List<SearchResult>();
                 Dispatcher.Invoke(() =>
@@ -92,7 +91,6 @@ namespace Отправить_билеты
                     data_grid.ItemsSource = list;
                     data_grid.UpdateLayout();
                 });
-                UnblocUi();
             });
         });
 
@@ -100,10 +98,8 @@ namespace Отправить_билеты
         {
             SafeRunCommand(() =>
             {
-                BlockUi();
                 ConfigManager.Read();
                 UpdateToUi_Parameters();
-                UnblocUi();
             });
         });
 
@@ -111,12 +107,10 @@ namespace Отправить_билеты
         {
             SafeRunCommand(() =>
             {
-                BlockUi();
                 UpdateFromUi_Parameters();
                 ConfigManager.Write();
                 ConfigManager.Read();
                 UpdateToUi_Parameters();
-                UnblocUi();
             });
         });
 
@@ -124,12 +118,17 @@ namespace Отправить_билеты
         {
             try
             {
+                BlockUi();
                 await Task.Run(action);
             }
             catch (Exception ex)
             {
                 Logger.Log(ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                UnblocUi();
             }
         }
 
