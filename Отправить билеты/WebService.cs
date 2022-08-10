@@ -54,7 +54,7 @@ namespace Отправить_билеты
         public List<SearchResult> GetList(SearchData search)
         {
             string searchString = GetLookupString(search);
-             Auth();            
+            Auth();
             // получаем список по поисковому запросу
             _session.Post(ConfigManager.Parameters.ListUrl, searchString, true);
             return HtmlParser.ProcessList(_session.ResponseData);
@@ -103,8 +103,8 @@ namespace Отправить_билеты
         private string GetLookupString(SearchData data)
      => $@"PageCount=100&Page=1&OrderCode={data.OrderCode}&OrderId={data.IdOrder}&Phone={data.Phone}&Email={data.Email}&DateStart={data.DateStart}&DateEnd={data.DateEnd}&TimeStart=&TimeEnd=&OrderSum=";
         ///////////////////////////////////////////////////////////////////////////////////
-        private string GetAuthString(string idsrv_xsrf)        
-             => $@"SiteId=&OrganizationId=&idsrv.xsrf={idsrv_xsrf}&username={Uri.EscapeDataString(ConfigManager.Parameters.User)}&password={Uri.EscapeDataString(ConfigManager.Parameters.Password)}";  
+        private string GetAuthString(string idsrv_xsrf)
+             => $@"SiteId=&OrganizationId=&idsrv.xsrf={idsrv_xsrf}&username={Uri.EscapeDataString(ConfigManager.Parameters.User)}&password={Uri.EscapeDataString(ConfigManager.Parameters.Password)}";
         ///////////////////////////////////////////////////////////////////////////////////
     }
 }

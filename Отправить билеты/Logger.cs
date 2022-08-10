@@ -10,8 +10,8 @@ namespace Отправить_билеты
 
         static Logger()
         {
-            if (File.Exists(_logFileName))            
-                File.Delete(_logFileName);            
+            if (File.Exists(_logFileName))
+                File.Delete(_logFileName);
         }
 
         /// <summary>

@@ -14,8 +14,9 @@ namespace Отправить_билеты
         public string ResponseData
         {
             get => _responseData;
-            private set {
-                if (value != null) 
+            private set
+            {
+                if (value != null)
                     _responseData = value;
             }
         }
@@ -43,7 +44,7 @@ namespace Отправить_билеты
             _request.ContentLength = 0;
             _response = (HttpWebResponse)_request.GetResponse();
             _responseData = GetResponseContent(_response);
-            if(ConfigManager.Parameters.IsDebugging) 
+            if (ConfigManager.Parameters.IsDebugging)
                 LogRequest();
         }
 
@@ -60,8 +61,8 @@ namespace Отправить_билеты
             _requestData = data;
             byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
             _request.ContentLength = byteArray.Length;
-            using (Stream dataStream = _request.GetRequestStream())            
-                dataStream.Write(byteArray, 0, byteArray.Length);            
+            using (Stream dataStream = _request.GetRequestStream())
+                dataStream.Write(byteArray, 0, byteArray.Length);
             _response = (HttpWebResponse)_request.GetResponse();
             _responseData = GetResponseContent(_response);
             if (ConfigManager.Parameters.IsDebugging) LogRequest();
@@ -77,7 +78,7 @@ namespace Отправить_билеты
             CreateRequest(URL, WebRequestMethods.Http.Get, true, redirect);
             _response = (HttpWebResponse)_request.GetResponse();
             _responseData = GetResponseContent(_response);
-            if (ConfigManager.Parameters.IsDebugging) 
+            if (ConfigManager.Parameters.IsDebugging)
                 LogRequest();
         }
         ///////////////////////////////////////////////////////////////////////////////////
@@ -96,8 +97,8 @@ namespace Отправить_билеты
             try
             {
                 using (Stream stream = response.GetResponseStream())
-                    using (StreamReader reader = new StreamReader(stream))
-                        content = reader.ReadToEnd();
+                using (StreamReader reader = new StreamReader(stream))
+                    content = reader.ReadToEnd();
             }
             catch (Exception ex)
             {

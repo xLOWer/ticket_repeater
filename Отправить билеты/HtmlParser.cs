@@ -47,7 +47,7 @@ namespace Отправить_билеты
                 ?.Attributes?.Single(x => x.Name == "value")/*(2)*/
                 ?.Value/*(3)*/) ?? ""/*(4)*/;
             // далее по аналогии (** хотя можно было бы ебануть и метод, но лень)
-            id_token = (inputs?.Single(x =>x.Attributes.Single(a => a.Name == "name").Value == nameof(id_token))
+            id_token = (inputs?.Single(x => x.Attributes.Single(a => a.Name == "name").Value == nameof(id_token))
                 ?.Attributes?.Single(x => x.Name == "value")
                 ?.Value) ?? "";
             scope = (inputs?.Single(x => x.Attributes.Single(a => a.Name == "name").Value == nameof(scope))
@@ -73,9 +73,9 @@ namespace Отправить_билеты
             List<SearchResult> result = new List<SearchResult>();
             HtmlDocument _doc1 = new HtmlDocument();
             _doc1.LoadHtml(html);
-            HtmlNodeCollection table_rows = _doc1.DocumentNode.SelectNodes("//table[@id='orders_table']/tbody/tr");            
-            if(table_rows.Count > 0)            
-                foreach (HtmlNode row in table_rows)                
+            HtmlNodeCollection table_rows = _doc1.DocumentNode.SelectNodes("//table[@id='orders_table']/tbody/tr");
+            if (table_rows.Count > 0)
+                foreach (HtmlNode row in table_rows)
                     result.Add(new SearchResult()
                     {
                         Id = HtmlEntity.DeEntitize(row?.SelectNodes("./td[1]")?.SingleOrDefault()?.InnerText ?? ""),

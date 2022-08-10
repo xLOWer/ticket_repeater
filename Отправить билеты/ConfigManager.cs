@@ -24,7 +24,7 @@ namespace Отправить_билеты
                 if (File.Exists(_confFile))
                 {
                     string confJsonText = File.ReadAllText(_confFile);
-                    if (string.IsNullOrEmpty(confJsonText)) 
+                    if (string.IsNullOrEmpty(confJsonText))
                         throw new Exception("Файл с параметрами пуст");
                     Parameters parameters = JsonConvert.DeserializeObject<Parameters>(confJsonText);
                     Parameters = parameters;
@@ -33,7 +33,7 @@ namespace Отправить_билеты
                 else
                 {
                     var result = MessageBox.Show("Создать стандартную конфигурацию?", "Конфигурация не найдена", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if(result == MessageBoxResult.Yes)
+                    if (result == MessageBoxResult.Yes)
                     {
                         SetDefaultParameters();
                         Write();
@@ -41,7 +41,7 @@ namespace Отправить_билеты
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
