@@ -7,7 +7,9 @@ namespace Отправить_билеты
 {
     public static class ConfigManager
     {
-        private static string _confFile = "conf";
+        private static string _directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\ticket_repeater";
+        private static string _confFileName = "conf";
+        private static string _confFile = Path.GetFullPath(_directory + "\\" + _confFileName);
 
         /// <summary>
         /// Указывает был ли считан фал с настройками
