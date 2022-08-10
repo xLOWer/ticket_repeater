@@ -82,7 +82,6 @@ namespace Отправить_билеты
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            IsReadConfig = false;
         }
 
         /// <summary>
@@ -92,6 +91,9 @@ namespace Отправить_билеты
 
         static ConfigManager()
         {
+            if (!Directory.Exists(_directory))
+                Directory.CreateDirectory(_directory);
+
             Parameters = new Parameters()
             {
                 User = "",
